@@ -2,6 +2,10 @@ import React, { Component, useState } from "react";
 import "../css/credit-card.css";
 import "../css/form-style.css";
 import Cards from "../react-credit-cards";
+import data from "./data.json";
+
+
+
 
 class Creditcard extends Component {
   timeoutID;
@@ -15,10 +19,9 @@ class Creditcard extends Component {
       focus: "",
       name: "",
       number: ""
-    };
-  }
+    };}
 
- 
+
 
   setup = () => {
     //if any of the events fire, it resets the timer
@@ -181,6 +184,10 @@ class Creditcard extends Component {
     } else this.setState({ [name]: value });
   };
 
+   
+
+  
+
   render() {
     return (
       <div>
@@ -342,12 +349,16 @@ class Creditcard extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>3456 3445 3444 7777</td>
-              <td>Marija Svinjarija</td>
-              <td>03/24</td>
-              <td>345</td>
-            </tr>
+            { data.map ((d)=> (
+              <tr>
+              <td>{d.number}</td>
+              <td>{d.name}</td>
+              <td>{d.expiry}</td>
+              <td>{d.cvc}</td>
+            </tr>            
+
+            ))}
+             
           </tbody>
           </table>
 
