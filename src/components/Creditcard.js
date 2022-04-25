@@ -184,9 +184,18 @@ class Creditcard extends Component {
     } else this.setState({ [name]: value });
   };
 
-   
+  handleInputToTable(event) {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value
+    });
+    }
 
-  
+  twoCalls = e => {
+    this.handleInputChange(e)
+    this.handleInputToTable()
+  }
 
   render() {
     return (
@@ -212,7 +221,7 @@ class Creditcard extends Component {
               <input
                 type="text"
                 placeholder="XXXX XXXX XXXX XXXX"
-                onChange={this.validateInput}
+                onChange={e  => {this.validateInput(e); this.handleInputToTable()}}
                 value={this.state.number}
                 onKeyDown={this.removeSpecial}
                 onPaste={(e) => e.preventDefault()}
@@ -239,7 +248,7 @@ class Creditcard extends Component {
                 maxLength="20"
                 autoComplete="off"
                 onPaste={(e) => e.preventDefault()}
-                onChange={this.handleInputChange}
+                onChange={e  => {this.validateInput(); this.handleInputToTable()}}
                 onFocus={this.handleInputFocus}
                 id="cardHolder"
                 className="form-control form-control-lg"
@@ -258,7 +267,7 @@ class Creditcard extends Component {
                     value={this.state.expiry}
                     name="expiry"
                     required="required"
-                    onChange={this.handleInputChange}
+                    onChange={this.twoCalls}
                     onFocus={this.handleInputFocus}
                     className="form-control form-control-lg"
                   >
@@ -286,7 +295,7 @@ class Creditcard extends Component {
                     value={this.state.expiryyear}
                     name="expiryyear"
                     required="required"
-                    onChange={this.handleInputChange}
+                    onChange={this.twoCalls}
                     onFocus={this.handleInputFocus}
                     className="form-control form-control-lg"
                   >
@@ -316,7 +325,7 @@ class Creditcard extends Component {
                 <input
                   type="number"
                   placeholder="XXX"
-                  onChange={this.validateInput}
+                  onChange={e  => {this.validateInput(e); this.handleInputToTable()}}
                   onKeyDown={this.removeSpecial}
                   onPaste={(e) => e.preventDefault()}
                   onFocus={this.handleInputFocus}
