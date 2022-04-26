@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import "../css/credit-card.css";
 import "../css/form-style.css";
+import { nanoid } from "nanoid";
 import Cards from "../react-credit-cards";
 import data from "./data.json";
 
@@ -21,6 +22,15 @@ class Creditcard extends Component {
       number: ""
     };}
 
+    state = {
+      id: nanoid(),
+      number: '',
+      name: '',
+      expiry: '',
+      cvc: '',
+
+      };
+    
 
 
   setup = () => {
@@ -85,6 +95,7 @@ class Creditcard extends Component {
   submit = (e) => {
     sessionStorage.setItem("user", JSON.stringify(this.state));
     e.preventDefault();
+    
 
     //restoring initial state of the app
     this.setState({
@@ -96,6 +107,11 @@ class Creditcard extends Component {
       focus: ""
     });
   };
+
+  saveStateToLocalStorage = () => { 
+    localStorage.setItem('state', JSON.stringify(this.state)); 
+  }
+  
 
   /*function to remove special characters like + - . e E 
     which are otherwise valid in case of type=number used in case  of cvc*/
@@ -332,7 +348,7 @@ class Creditcard extends Component {
 
             <button
               className="btn btn-primary btn-lg btn-block"
-              onClick={this.submit}
+              onClick={this.saveStateToLocalStorage}
             >
               Submit
             </button>
